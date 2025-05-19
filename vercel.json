@@ -32,6 +32,10 @@
         "dest": "/style.css"
       },
       {
+        "src": "/^\\/$",
+        "dest": "/index.html"
+      },
+      {
         "src": "/(.*)",
         "dest": "/server/server.js"
       }
