@@ -22,10 +22,6 @@
       {
         "src": "/socket.io/(.*)",
         "dest": "/server/server.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
       }
     ]
   }
