@@ -1,0 +1,173 @@
+body {
+    background-color: #0a0a23; /* Dark blue background */
+    color: #fff;
+    display: flex;
+    flex-direction: column; /* Sayfa içeriğini dikeyde ortalamak için */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Prevent scrollbars */
+    padding: 10px; /* Sayfa kenarlarına biraz boşluk */
+    box-sizing: border-box;
+}
+
+/* Ana oyun ve rakip konteynerini saran genel bir wrapper */
+#main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Üstten hizala */
+    gap: 20px;
+    width: 100%;
+    max-width: 1600px; /* Oyunun maksimum genişliği, isteğe bağlı */
+    height: calc(100vh - 40px); /* Padding'i hesaba kat */
+}
+
+#game-container {
+    display: flex; 
+    flex-direction: column; 
+    align-items: stretch; /* Make children (canvas) take full width */
+    position: relative; 
+    border: 3px solid #0ff; 
+    box-shadow: 0 0 20px #0ff, 0 0 30px #0ff inset;
+    background-color: #000; 
+    flex-grow: 4; /* Increased from 3 to 4 to give main game more space */
+    flex-shrink: 1;
+    flex-basis: 0; /* flex-grow'a göre orantılansın */
+    min-width: 320px; /* Çok küçülmesini engelle */
+    height: 100%; /* #main-wrapper yüksekliğini doldursun */
+    padding: 10px; /* İç boşluk */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent any overflow */
+}
+
+#gameCanvas {
+    display: block; 
+    flex-grow: 1; /* Allow canvas to take up available vertical space */
+    min-height: 0; /* Important for flex item that can shrink below its content size */
+    background-color: #050505;
+    width: 100%; /* Take full width of container */
+    height: 100%; /* Take full height of available space */
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
+}
+
+#ui-container {
+    width: calc(100% - 10px); /* Matches parent padding */
+    /* width: 100%; */ /* Simpler, but ensure box-sizing is border-box if it has padding */
+    box-sizing: border-box; /* Add if not already present and using padding with width 100% */
+    margin: 5px 0 0 0; /* Margin top, align with game-container padding */
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 8px;
+    flex-shrink: 0; /* UI container küçülmesin */
+}
+
+#ui-container div,
+#ui-container button {
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #0ff;
+}
+
+#mute-button {
+    background-color: #0af; /* Neon Blue */
+    border: 1px solid #0af;
+    box-shadow: 0 0 10px #0af;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 1em; /* Ensure icon size is reasonable */
+    /* margin-left: 10px; /* Gap in #ui-container handles spacing */
+}
+
+#mute-button:hover {
+    background-color: #08d;
+}
+
+#lobby-container {
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(26, 26, 58, 0.9); /* Slightly transparent */
+    border-radius: 15px;
+    box-shadow: 0 0 20px #0ff, 0 0 35px #f0f inset; /* Added magenta inner glow */
+    border: 2px solid #f0f;
+}
+
+#lobby-container input, #lobby-container button {
+    margin: 8px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #0ff;
+    background-color: #0a0a23;
+    color: #fff;
+    font-size: 1em;
+}
+
+#lobby-container button {
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#lobby-container button:hover {
+    background-color: #2a2a5a; /* Slightly lighter on hover */
+    box-shadow: 0 0 10px #f0f; /* Magenta glow on hover */
+} 
+
+/* Opponent games container - #main-wrapper içinde #game-container'ın yanında olacak */
+#opponent-games-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 8px; /* Mini ekranlar arası boşluk azaltıldı */
+    padding: 8px;
+    background-color: rgba(10, 10, 20, 0.85); 
+    border-radius: 8px;
+    border: 2px solid #0cf;
+    box-shadow: 0 0 10px #0cf;
+    flex-grow: 1; /* Rakip alanı da büyüyebilsin ama ana oyundan az */
+    flex-shrink: 1;
+    flex-basis: 0; /* flex-grow'a göre orantılansın */
+    min-width: 180px; /* Reduced from 200px */
+    max-width: 250px; /* Reduced from 280px */
+    height: 100%; /* #main-wrapper yüksekliğini doldursun */
+    overflow-y: auto; /* Eğer sığmazsa yine de scroll çıksın, ama idealde sığmalı */
+    box-sizing: border-box;
+}
+
+.opponent-view {
+    border: 1px solid #077; 
+    padding: 5px;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px; 
+}
+
+.opponent-view canvas {
+    border: 1px solid #099; 
+    background-color: #1a1a2a; 
+    width: 100%; /* Konteynerine göre genişlesin */
+    /* Yükseklik JS ile ayarlanıyor, sabit bir en boy oranı (örn: 16/9) korunarak */
+    /* height: auto; /* veya JS ile ayarlanacak */
+    aspect-ratio: 16 / 9; /* CSS ile en-boy oranını korumaya çalışalım */
+    max-width: 100%; /* Konteyner dışına taşmasın */
+}
+
+.opponent-name {
+    color: #0ff; 
+    font-size: 12px; /* Biraz küçültüldü */
+    /* margin-bottom: 5px; gap ile ayarlandı */
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0 0 3px #0ff;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Uzun isimler için ... */
+}

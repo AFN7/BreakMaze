@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BreakMaze</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- YENİ WRAPPER -->
+    <div id="main-wrapper" style="display: none;"> 
+        <div id="game-container">
+            <canvas id="gameCanvas"></canvas>
+            <div id="ui-container">
+                <div id="score">Score: 0</div>
+                <div id="lives">Lives: 3</div>
+                <div id="power-ups-status"></div>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" title="Volume">
+                <button id="mute-button">🔊</button>
+            </div>
+        </div>
+        <div id="opponent-games-container"> 
+            <!-- Mini opponent canvases will be added here by script.js -->
+        </div>
+    </div>
+
+    <div id="lobby-container">
+        <h2>Game Lobby</h2>
+        <input type="text" id="player-name" placeholder="Enter Your Name">
+        <input type="text" id="room-code-input" placeholder="Enter Room Code (to join)">
+        <button id="join-room-button">Join Room</button>
+        <button id="create-room-button">Create Room</button>
+        <button id="ready-button" style="display: none; background-color: #28a745; margin-top:10px;">Ready Up</button>
+        <div id="room-list-info"></div>
+        <div id="players-in-room"></div>
+        <div id="error-message" style="color: red; margin-top: 10px;"></div>
+    </div>
+    
+    <!-- Audio Elements --> 
+    <audio id="sound-brick-break" src="./client/sounds/brick_break.mp3" preload="auto"></audio>
+    <audio id="sound-paddle-hit" src="./client/sounds/paddle_hit.mp3" preload="auto"></audio>
+    <audio id="sound-powerup-collect" src="./client/sounds/powerup_collect.mp3" preload="auto"></audio>
+    <audio id="sound-level-clear" src="./client/sounds/level_clear.mp3" preload="auto"></audio>
+    <audio id="sound-game-over" src="./client/sounds/game_over.mp3" preload="auto"></audio>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client/script.js"></script> 
+</body>
+</html> 

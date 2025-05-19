@@ -1,0 +1,163 @@
+Create a Web-Based Multiplayer Brick Breaker Game with Dynamic Maps and Power-Ups
+I want you to design and build a professional multiplayer web-based arcade game inspired by the classic brick breaker concept. The goal is to deliver a fast-paced, visually appealing, real-time multiplayer experience with power-ups and evolving block patterns.
+
+📦 General Overview
+Game name : BreakMaze
+
+Genre: Arcade / Puzzle / Action
+
+Platform: Web browser (desktop and mobile)
+
+Multiplayer support: 1 to 5 players per room via lobby system
+
+Real-time multiplayer with WebSocket communication
+
+Power-up system and dynamically changing block layouts
+
+Fast-paced, competitive gameplay with short sessions (2–10 minutes)
+
+⚙️ Technology Stack (for 2025)
+Frontend:
+
+HTML5 Canvas or WebGL (e.g. with PixiJS or Three.js if needed)
+
+JavaScript / TypeScript
+
+React or Vanilla JS for UI
+
+Backend:
+
+Node.js with Socket.IO or native WebSocket
+
+Room-based matchmaking (with RESTful endpoints if needed)
+
+Game state server-authoritative to prevent cheating
+
+Database:
+
+MongoDB or Redis (for storing leaderboard, stats, matchmaking queues)
+Chosen: MongoDB Atlas
+Connection String: mongodb+srv://afanselcuk:J5J5FFLnfc73o3OY@breaker.cmhqe1s.mongodb.net/?retryWrites=true&w=majority&appName=Breaker
+
+Deployment:
+
+Vercel, Netlify, or DigitalOcean (server) for scalability
+
+PWA-ready build for mobile browser support
+
+Electron export option for desktop (later stages)
+
+Potential Unity version or Flutter port for Steam/mobile in future
+
+🎮 Game Mechanics
+Player Controls:
+PC: Left/Right Arrow and Mouse drag to control paddle
+
+Mobile: Touch and drag
+
+Core Mechanics:
+Each player controls a paddle at the bottom
+
+Balls bounce off and hit bricks arranged in unique maze-like layouts
+
+The game starts with 1 ball and can multiply during the match
+
+Bricks get destroyed on hit, releasing power-ups randomly
+
+The goal is to clear as many bricks as possible or survive the longest
+
+Game Modes:
+Score Rush: Destroy the most bricks in 3 minutes
+
+Survival: Last paddle standing
+
+Co-op Mode: Work together to clear a pattern
+
+🧩 Power-Ups (with visual & audio feedback)
+Name	Effect
+🔵 Double Ball	Splits current ball into 2
+🔴 Triple Ball	Creates 3 balls
+🔶 Paddle Grow	Paddle becomes longer
+🔽 Paddle Shrink	Paddle becomes shorter
+🟠 Slow Ball	Reduces speed
+🔺 Fast Ball	Increases speed
+⛔ Inverted Controls	Temporarily reverses controls
+🛡️ Shield	Temporary floor shield
+🔃 Brick Swap	Randomizes some bricks again
+
+Power-ups drop down and players can catch them with their paddle
+
+Some are helpful, others are chaotic
+
+🗺️ Map System
+Brick patterns are dynamically generated or randomly selected from a library of 20+ premade layouts(Generate them)
+
+Some maps are narrow tunnels, spirals, or shifting mazes
+
+Bricks can be static or moving (later upgrade)
+
+Additions: brick types like explosive, regenerating, unbreakable
+
+🧑‍🤝‍🧑 Multiplayer & Lobby System
+Players can create or join rooms (private or public)
+
+Use WebSocket rooms to sync each match
+
+Real-time synchronization of ball position, paddle location, and block state
+
+Server maintains game logic (ball physics, collision, etc.) to ensure fairness
+
+Add latency compensation and simple prediction if needed
+
+🎨 Visual & Audio Design
+Art Style: Clean neon theme with glowing paddles, trails, and blocks
+
+Particles: Light explosion effect on brick break
+
+UI: Modern minimalist score and timer HUD
+
+Sounds:
+
+Pop for block break
+
+Ping for paddle hit
+
+Power-up collect SFX
+
+Background music: Synthwave / chipwave loop (optional mute toggle)
+
+Responsive design: Looks good on phones, tablets, and desktops
+
+🧪 Extra Features (Optional or Future Phases)
+Skins for paddles, balls, themes
+
+Account/login system (optional Firebase Auth)
+
+Leaderboards (weekly, all-time)
+
+Friend invite via room code
+
+Replay or highlight export
+
+Emoji reactions or taunts in-game
+
+Users can see other peoples game via small window on the right sidebar.
+
+After they are done or eliminated, they can watch other players by clicking.
+
+Nice responsive design with giving information about the game and site.
+
+Players can adjust volumes of music or effects via volume slider.
+
+🚀 Deliverables
+Fully playable multiplayer demo hosted online
+
+Room/lobby system working with at least 3 unique maps
+
+Full codebase with clear structure (modular JS/TS, separated client-server logic)
+
+PWA support (mobile playability)
+
+Documentation of core logic, WebSocket flow, and future scalability ideas
+
+This project should feel polished, intuitive, and fun. I want visual feedback and sound effects to be satisfying and polished. Think of a cross between Arkanoid + Slither.io + neon synth style.
