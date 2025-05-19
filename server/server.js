@@ -38,8 +38,7 @@ const io = socketIo(server, {
         },
         methods: ["GET", "POST"]
     },
-    transports: ['websocket', 'polling'], // Prioritize WebSocket
-    cookie: false // Disable cookie-based sticky sessions for polling
+    transports: ['websocket', 'polling'] // Prioritize WebSocket
 });
 
 // Serve static files from the parent directory's 'client' folder and root for index.html, style.css
