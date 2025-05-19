@@ -15,11 +15,30 @@ mongoose.connect(MONGO_URI)
 
 const app = express();
 const server = http.createServer(app);
+
+// IMPORTANT: Replace "https://your-breakmaze-app.vercel.app" with your actual Vercel deployment URL.
+// Also, ensure "http://localhost:3000" matches your local development server port if it's different.
+const allowedOrigins = [
+    "https://break-maze.vercel.app", // Your Vercel deployment URL
+    "http://localhost:3000",               // For local development if you serve index.html on port 3000
+    "http://127.0.0.1:3000",             // Also for local development
+    // If your game is served from a different local port or you have other trusted origins, add them here.
+];
+
 const io = socketIo(server, {
     cors: {
-        origin: "*", // Allow all origins for development, restrict in production
+        origin: function (origin, callback) {
+            // Allow requests with no origin (like mobile apps or curl requests)
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.indexOf(origin) === -1) {
+                const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+                return callback(new Error(msg), false);
+            }
+            return callback(null, true);
+        },
         methods: ["GET", "POST"]
-    }
+    },
+    transports: ['websocket', 'polling'] // Prioritize WebSocket
 });
 
 // Serve static files from the parent directory's 'client' folder and root for index.html, style.css
